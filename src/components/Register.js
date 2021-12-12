@@ -35,11 +35,9 @@ function Register(props) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <div className="form__button form__button_container">
-          <button type="submit" className="form__link">
-            Sign up
-          </button>
-        </div>
+        <button type="submit" className="form__button form__button_container">
+          <p className="form__link">Sign up</p>
+        </button>
       </form>
 
       <div className="form__signin">

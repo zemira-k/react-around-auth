@@ -11,24 +11,22 @@ function InfoTooltip(props) {
         <button
           onClick={props.onClose}
           aria-label="popup__close"
-          className={`popup__close popup__close_type_info`}
+          className={`popup__close`}
           type="button"
           id="btnClose"
         ></button>
-        <form className={`form form_type_info`} name={props.name}>
-          <fieldset className="form__set">
-            <img
-              className="form__image"
-              src={`${props.isSuccessful ? union : unionx}`}
-              alt={`${props.isSuccessful ? "success" : "fail"}`}
-            ></img>
-            <p className="form__text">{`${
-              props.isSuccessful
-                ? "Success! You have now been registered."
-                : "Oops, something went wrong! Please try again."
-            }`}</p>
-          </fieldset>
-        </form>
+        <div className="info" name={props.name}>
+          <img
+            className="info__image"
+            src={`${props.isSuccessful ? union : unionx}`}
+            alt={`${props.isSuccessful ? "success" : "fail"}`}
+          ></img>
+          <p className="info__text">{`${
+            props.isSuccessful
+              ? "Success! You have now been registered."
+              : "Oops, something went wrong! Please try again."
+          }`}</p>
+        </div>
       </div>
     </div>
   );

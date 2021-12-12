@@ -60,14 +60,17 @@ function App() {
     // if user has a token in storage, check if it is valid
     if (localStorage.getItem("jwt")) {
       const jwt = localStorage.getItem("jwt");
-      auth.getContent(jwt).then((res) => {
-        if (res) {
-          setEmail(res.data.email);
-          console.log(res);
-          setLoggedIn(true);
-          history.push("/");
-        }
-      });
+      auth
+        .getContent(jwt)
+        .then((res) => {
+          if (res) {
+            setEmail(res.data.email);
+            console.log(res);
+            setLoggedIn(true);
+            history.push("/");
+          }
+        })
+        .catch((err) => console.log(err));
     }
   }, []);
 
@@ -131,12 +134,15 @@ function App() {
       return;
     }
     console.log("success");
-    auth.login(password, email).then((data) => {
-      if (data.token) {
-        setLoggedIn(true);
-        history.push("/");
-      }
-    });
+    auth
+      .login(password, email)
+      .then((data) => {
+        if (data.token) {
+          setLoggedIn(true);
+          history.push("/");
+        }
+      })
+      .catch((err) => console.log(err));
   }
 
   function handleLogout() {
@@ -147,16 +153,19 @@ function App() {
   }
 
   function handleRegister({ email, password }) {
-    auth.register(password, email).then((res) => {
-      if (res) {
-        handleSuccessTooltip();
-        history.push("/signin");
-        console.log("Register success");
-      } else {
+    auth
+      .register(password, email)
+      .then((res) => {
+        if (res) {
+          handleSuccessTooltip();
+          history.push("/signin");
+          console.log("Register success");
+        }
+      })
+      .catch((err) => {
         handleFailureTooltip();
         console.log("Something went wrong.");
-      }
-    });
+      });
   }
 
   // handles to open and close popups
@@ -200,6 +209,16 @@ function App() {
       isSuccessful: false,
     });
   }
+
+  React.useEffect(() => {
+    const closeByEscape = (e) => {
+      if (e.key === "Escape") {
+        closeAllPopups();
+      }
+    };
+    document.addEventListener("keydown", closeByEscape);
+    return () => document.removeEventListener("keydown", closeByEscape);
+  }, []);
 
   return (
     <div className="page__container">

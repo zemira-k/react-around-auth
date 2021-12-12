@@ -35,11 +35,11 @@ function Login(props) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <div className="form__button form__button_container">
-          <button type="submit" className="form__link">
+        <button type="submit" className="form__button form__button_container">
+          <p type="submit" className="form__link">
             Sign in
-          </button>
-        </div>
+          </p>
+        </button>
       </form>
 
       <div className="form__signin">
